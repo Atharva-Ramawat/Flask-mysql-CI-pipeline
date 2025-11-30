@@ -36,8 +36,20 @@ jobs:
       # Step 5: The "Smoke Test"
       # We use 'curl' to send a request to localhost:5000.
       # The '-f' flag means "Fail this step if the server returns an error".
-      - name: Verify App is Responding
-        run: curl -f http://localhost:5000
+      #- name: Verify App is Responding
+      #  run: curl -f http://localhost:5000
+        
+
+      # Step 5: Install Test Dependencies
+      # We need 'requests' to run our python test script
+      - name: Install Test Dependencies
+        run: pip install requests
+
+      # Step 6: Run Integration Test
+      # This runs the python script we just verified
+      - name: Run Integration Test Suite
+        run: python integration_test.py
+
         
       # Step 6: Show Logs (If something went wrong)
       # This prints the container logs to the GitHub console for debugging
