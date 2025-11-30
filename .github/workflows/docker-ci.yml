@@ -20,7 +20,7 @@ jobs:
       # Step 2: Build the Docker images and start the containers
       # The '-d' flag runs them in the background so the pipeline doesn't freeze
       - name: Build and Start Containers
-        run: docker-compose up -d --build
+        run: docker compose up -d --build
 
       # Step 3: Wait for the Database (Vital!)
       # Even with our retry logic, CI environments can be slow. 
@@ -31,7 +31,7 @@ jobs:
       # Step 4: Check if containers are still running
       # If the app crashed, this will show us the error
       - name: Check Container Status
-        run: docker-compose ps
+        run: docker compose ps
 
       # Step 5: The "Smoke Test"
       # We use 'curl' to send a request to localhost:5000.
@@ -43,8 +43,8 @@ jobs:
       # This prints the container logs to the GitHub console for debugging
       - name: Show Logs (for debugging)
         if: always()
-        run: docker-compose logs
+        run: docker compose logs
 
       # Step 7: Cleanup
       - name: Tear Down
-        run: docker-compose down
+        run: docker compose down
