@@ -5,8 +5,6 @@ from flask import Flask
 app = Flask(__name__)
 
 def get_db_connection():
-    # RETRY LOGIC: The DB takes longer to start than the App.
-    # We must wait for it, or the app will crash immediately.
     retries = 5
     while retries > 0:
         try:
@@ -31,14 +29,11 @@ def hello():
     
     cursor = conn.cursor()
     
-    # Create table if it doesn't exist
     cursor.execute("CREATE TABLE IF NOT EXISTS visits (id INT AUTO_INCREMENT PRIMARY KEY, count INT)")
     
-    # Insert a visit
     cursor.execute("INSERT INTO visits (count) VALUES (1)")
     conn.commit()
     
-    # Count total visits
     cursor.execute("SELECT COUNT(*) FROM visits")
     count = cursor.fetchone()[0]
     
