@@ -1,0 +1,50 @@
+name: Docker CI Pipeline
+
+# Trigger: Run this whenever code is pushed to the 'main' branch
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+jobs:
+  build-and-test:
+    # Run on a standard Linux machine provided by GitHub
+    runs-on: ubuntu-latest
+
+    steps:
+      # Step 1: Download the code from the repository
+      - name: Checkout Code
+        uses: actions/checkout@v3
+
+      # Step 2: Build the Docker images and start the containers
+      # The '-d' flag runs them in the background so the pipeline doesn't freeze
+      - name: Build and Start Containers
+        run: docker-compose up -d --build
+
+      # Step 3: Wait for the Database (Vital!)
+      # Even with our retry logic, CI environments can be slow. 
+      # We pause for 30 seconds to let MySQL initialize fully.
+      - name: Wait for Database to Start
+        run: sleep 30
+
+      # Step 4: Check if containers are still running
+      # If the app crashed, this will show us the error
+      - name: Check Container Status
+        run: docker-compose ps
+
+      # Step 5: The "Smoke Test"
+      # We use 'curl' to send a request to localhost:5000.
+      # The '-f' flag means "Fail this step if the server returns an error".
+      - name: Verify App is Responding
+        run: curl -f http://localhost:5000
+        
+      # Step 6: Show Logs (If something went wrong)
+      # This prints the container logs to the GitHub console for debugging
+      - name: Show Logs (for debugging)
+        if: always()
+        run: docker-compose logs
+
+      # Step 7: Cleanup
+      - name: Tear Down
+        run: docker-compose down

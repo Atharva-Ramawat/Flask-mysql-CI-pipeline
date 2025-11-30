@@ -1,0 +1,19 @@
+version: '3.8'
+
+services:
+  # Service 1: Your Python App (The Waiter)
+  web-app:
+    build: .             # Build from the current folder
+    ports:
+      - "5000:5000"      # Open port 5000 so we can see it
+    depends_on:
+      - mysql-db         # Wait for the DB to exist before starting
+
+  # Service 2: The Database (The Filing Cabinet)
+  mysql-db:
+    image: mysql:5.7     # Download this specific version from the internet
+    environment:
+      MYSQL_ROOT_PASSWORD: password  # Must match your Python code!
+      MYSQL_DATABASE: testdb         # Must match your Python code!
+    ports:
+      - "3306:3306"      # Standard MySQL port
