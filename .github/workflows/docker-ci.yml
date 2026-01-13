@@ -33,6 +33,6 @@ jobs:
         if: always()
         run: docker compose logs
 
-      # Step 7: Cleanup
+      
       - name: Tear Down
         run: docker compose down
