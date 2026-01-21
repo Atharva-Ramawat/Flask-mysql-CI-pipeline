@@ -11,7 +11,6 @@ jobs:
     runs-on: self-hosted
 
     steps:
-   
       - name: Checkout Code
         uses: actions/checkout@v3
 
@@ -25,14 +24,14 @@ jobs:
         run: docker compose ps
 
       - name: Install Test Dependencies
-        run: pip install requests
+        run: pip3 install requests
+
       - name: Run Integration Test Suite
-        run: python integration_test.py
+        run: python3 integration_test.py
 
       - name: Show Logs (for debugging)
         if: always()
         run: docker compose logs
 
-      
       - name: Tear Down
         run: docker compose down
