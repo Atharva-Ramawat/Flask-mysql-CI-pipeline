@@ -59,7 +59,7 @@ Follow these instructions to set up the project locally.
 
 1.  **Clone the repository**
     ```bash
-    git clone [https://github.com/Atharva-Ramawat/Flask-mysql-CI-pipeline.git](https://github.com/Atharva-Ramawat/Flask-mysql-CI-pipeline.git)
+    git clone https://github.com/Atharva-Ramawat/Flask-mysql-CI-pipeline
     cd Flask-mysql-CI-pipeline
     ```
 
