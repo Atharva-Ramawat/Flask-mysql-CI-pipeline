@@ -23,11 +23,12 @@ jobs:
       - name: Check Container Status
         run: docker compose ps
 
-      - name: Install Test Dependencies
-        run: pip3 install requests
-
-      - name: Run Integration Test Suite
-        run: python3 integration_test.py
+      - name: Run Integration Tests
+        run: |
+          python3 -m venv venv
+          source venv/bin/activate
+          pip install requests
+          python3 integration_test.py
 
       - name: Show Logs (for debugging)
         if: always()
