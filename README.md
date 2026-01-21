@@ -1,32 +1,32 @@
 # Flask MySQL CI Pipeline
 
-![CI Status](https://img.shields.io/badge/build-passing-brightgreen) ![Flask](https://img.shields.io/badge/flask-2.0-black) ![MySQL](https://img.shields.io/badge/mysql-8.0-blue) ![Docker](https://img.shields.io/badge/container-docker-blue)
+![CI Status](https://img.shields.io/badge/build-passing-brightgreen) ![Flask](https://img.shields.io/badge/flask-2.0-black) ![MySQL](https://img.shields.io/badge/mysql-8.0-blue) ![AWS](https://img.shields.io/badge/AWS-EC2-232F3E?logo=amazon-aws&logoColor=white)
 
-A robust, containerized two-tier application integrating a **Flask** backend with a **MySQL** database. This project demonstrates modern DevOps practices with a fully automated **GitHub Actions** Continuous Integration (CI) pipeline.
+A robust, containerized two-tier application integrating a **Flask** backend with a **MySQL** database. This project demonstrates modern DevOps practices with a fully automated **GitHub Actions** Continuous Integration (CI) pipeline executed on **Self-Hosted AWS EC2 Runners**.
 
 ---
 
 ## 📖 Project Overview
 
-This repository showcases a microservices architecture where the application logic (Flask) and data persistence (MySQL) are decoupled and containerized. The primary focus is on **automation** and **reliability**: ensuring that every code change is automatically built, tested, and verified before deployment.
+This repository showcases a microservices architecture where the application logic (Flask) and data persistence (MySQL) are decoupled and containerized. The primary focus is on **automation**, **reliability**, and **infrastructure control**.
 
 ### Key Features
 * **Two-Tier Architecture:** Seamless integration between Flask (Application Layer) and MySQL (Data Layer).
+* **Self-Hosted Infrastructure:** Utilizes custom **AWS EC2 instances** as GitHub Actions runners, providing full control over the build environment and dependencies.
 * **Containerization:** Fully isolated environments using Docker.
 * **Automated CI Pipeline:** Triggers builds on every push to `main` via GitHub Actions to ensure code integrity.
-* **Scalability:** Designed to be easily orchestrated with tools like Kubernetes.
 
 ---
 
 ## ⚙️ CI/CD Pipeline Workflow
 
-The core of this project is the **GitHub Actions** workflow, which automates the build process.
+The core of this project is the **GitHub Actions** workflow, which automates the build process on our cloud infrastructure.
 
 **Workflow Stages:**
-1.  **Source Checkout:** Retrieves the latest commit.
+1.  **Source Checkout:** Retrieves the latest commit on the **AWS EC2 runner**.
 2.  **Environment Setup:** Initializes the build environment.
 3.  **Docker Build:** Compiles the Docker images for Flask and MySQL.
-4.  **Verification:** Validates the build status.
+4.  **Verification:** Validates the build status inside the self-hosted environment.
 
 ### Pipeline Visualization
 Below is a capture of the GitHub Actions workflow execution, validating the successful integration of the latest build.
@@ -42,6 +42,7 @@ Below is a capture of the GitHub Actions workflow execution, validating the succ
 | :--- | :--- | :--- |
 | **Backend** | ![Flask](https://img.shields.io/badge/-Flask-000000?logo=flask&logoColor=white) | Python-based lightweight web framework. |
 | **Database** | ![MySQL](https://img.shields.io/badge/-MySQL-4479A1?logo=mysql&logoColor=white) | Relational database management system. |
+| **Infrastructure** | ![AWS](https://img.shields.io/badge/-AWS_EC2-232F3E?logo=amazon-aws&logoColor=white) | Self-hosted runner for executing CI jobs. |
 | **Containerization** | ![Docker](https://img.shields.io/badge/-Docker-2496ED?logo=docker&logoColor=white) | Used to package the application and database. |
 | **CI/CD** | ![GitHub Actions](https://img.shields.io/badge/-GitHub_Actions-2088FF?logo=github-actions&logoColor=white) | Automates the build and test workflows. |
 
@@ -59,7 +60,7 @@ Follow these instructions to set up the project locally.
 
 1.  **Clone the repository**
     ```bash
-    git clone https://github.com/Atharva-Ramawat/Flask-mysql-CI-pipeline
+    git clone [https://github.com/Atharva-Ramawat/Flask-mysql-CI-pipeline](https://github.com/Atharva-Ramawat/Flask-mysql-CI-pipeline)
     cd Flask-mysql-CI-pipeline
     ```
 
