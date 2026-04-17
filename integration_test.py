@@ -12,7 +12,6 @@ def get_visit_count():
             print(f"Error: Server returned {response.status_code}")
             return None
         
-        # Extract the number from "Hello! I have been visited X times."
         text = response.text
         match = re.search(r'visited (\d+) times', text)
         if match:
