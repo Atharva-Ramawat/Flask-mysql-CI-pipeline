@@ -2,7 +2,7 @@ import requests
 import re
 import sys
 
-# The URL of our Docker container
+
 url = "http://localhost:5000"
 
 def get_visit_count():
