@@ -5,7 +5,7 @@ FROM python:3.9-slim
 WORKDIR /app
 
 # 3. Copy dependencies first (for caching speed)
-COPY requirements.txt .
+COPY requirements.tx .
 
 # 4. Install the dependencies
 RUN pip install -r requirements.txt
