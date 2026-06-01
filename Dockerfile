@@ -1,20 +1,21 @@
-# 1. Start with a base OS that has Python installed
 FROM python:3.9-slim
 
-# 2. Set the working directory inside the container
 WORKDIR /app
 
-# 3. Copy dependencies first (for caching speed)
+# Create a non-privileged user
+RUN addgroup --system appuser && adduser --system --ingroup appuser appuser
+
+# Copy dependencies and install
 COPY requirements.txt .
+RUN pip install --no-cache-dir -r requirements.txt
 
-# 4. Install the dependencies
-RUN pip install -r requirements.txt
-
-# 5. Copy the rest of our app code 
+# Copy app code and set ownership
 COPY . .
+RUN chown -R appuser:appuser /app
 
-# 6. Expose the port so we can access it
+# Switch to the non-privileged user
+USER appuser
+
 EXPOSE 5000
 
-# 7. The command to run when the container starts
 CMD ["python", "app.py"]
